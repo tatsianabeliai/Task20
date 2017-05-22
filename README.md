@@ -4,9 +4,9 @@ The test task on TestNG test framework
 Project to this task is correct, do not change Mathematics class!
 Complete tasks, which are related to Training 20. 
 1.       Use the project from Training 2 for this task. Create two classes with tests (see details below).
-•	Class 1 
+Class 1 
 Should contain 4 unit tests (for each method in mathematics class)
-•	Class 2 
+Class 2 
 Create one test with empty body
 2.       Ignore test from Class 2 in test run
 3.       Change the order of test execution
