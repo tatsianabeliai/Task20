@@ -5,16 +5,12 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class DataProviderHelper {
+public class TxtDataProvider {
 
     protected Object[][] DataProviderData;
     private String path;
 
-    public DataProviderHelper(String path) {
-        this.path = path;
-    }
-
-    @DataProvider(name = "dataProvider")
+    @DataProvider(name = "txtDataProvider")
     public Object[][] testData() throws IOException {
 
         BufferedReader readDate = new BufferedReader(new FileReader("src/main/resources/testData.txt"));
