@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="testOneMethodRun">
+    <test name="runOnlyOneTest">
+        <classes>
+            <class name="ClassOneTest">
+                <methods>
+                    <include name="addTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite>
