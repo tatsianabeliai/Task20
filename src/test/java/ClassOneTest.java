@@ -72,7 +72,7 @@ public class ClassOneTest extends TxtDataProvider {
         Assert.assertEquals(divideResult, result);
     }
 
-    @Description("The test gets data from testngDDTTest.xml file. Run testngGGTTest.xml")
+    @Description("The test gets data from testngDDTTest.xml file. Run testngDDTTest.xml")
     @Test(groups = "fast")
     @Parameters(value = {"numberX", "numberY"})
     public void DDTTest(int numberX, int numberY) {
