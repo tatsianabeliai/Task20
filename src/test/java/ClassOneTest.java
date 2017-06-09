@@ -2,17 +2,16 @@ import com.sun.org.glassfish.gmbal.Description;
 import org.apache.log4j.Logger;
 import org.testng.Assert;
 import org.testng.annotations.*;
-import org.testng.annotations.Test;
 
 public class ClassOneTest extends TxtDataProvider {
     private static final Logger LOG = Logger.getLogger(ClassOneTest.class);
-    private Mathematics mathematics;
     private final static int numberOne = 50;
     private final static int numberTwo = 5;
     private final static int sumResult = 55;
     private final static int deductResult = 45;
     private final static int multiplyResult = 250;
     private final static int divideResult = 10;
+    private Mathematics mathematics;
 
     @BeforeClass(alwaysRun = true)
     public void onceExecutedBeforeAll() {
@@ -73,39 +72,56 @@ public class ClassOneTest extends TxtDataProvider {
     }
 
     @Description("The test gets data from testngDDTTest.xml file. Run testngDDTTest.xml")
-    @Test(groups = "fast")
-    @Parameters(value = {"numberX", "numberY"})
+    @Test(groups = "fast", dataProvider = "txtDataProvider")
     public void DDTTest(int numberX, int numberY) {
+        int expectedSum = numberX + numberY;
+        int expectedDeduct = numberX - numberY;
+        int expectedMultiply = numberX * numberY;
+        int expectedDivide = numberX / numberY;
+
         mathematics.add(numberX, numberY);
-        Assert.assertEquals(mathematics.getResult(), numberX + numberY, "Not expected result: ");
+        int sumResult = mathematics.getResult();
+        Assert.assertEquals(sumResult, expectedSum, "Not expected result: ");
 
         mathematics.deduct(numberX, numberY);
-        Assert.assertEquals(mathematics.getResult(), numberX - numberY, "Not expected result: ");
+        int deductResult = mathematics.getResult();
+        Assert.assertEquals(deductResult, expectedDeduct, "Not expected result: ");
 
         mathematics.setResult(0);
         mathematics.multiply(numberX, numberY);
-        Assert.assertEquals(mathematics.getResult(), numberX * numberY, "Not expected result: ");
+        int multiplyResult = mathematics.getResult();
+        Assert.assertEquals(multiplyResult, expectedMultiply, "Not expected result: ");
 
         mathematics.setResult(0);
         mathematics.divide(numberX, numberY);
-        Assert.assertEquals(mathematics.getResult(), numberX / numberY, "Not expected result: ");
+        int divideResult = mathematics.getResult();
+        Assert.assertEquals(divideResult, expectedDivide, "Not expected result: ");
     }
 
     @Description("The test gets data from testData.txt file.")
     @Test(groups = "fast", dataProvider = "txtDataProvider")
     public void DDTWithTxtDataProviderTest(int numberOne, int numberTwo) {
+        int expectedSum = numberOne + numberTwo;
+        int expectedDeduct = numberOne - numberTwo;
+        int expectedMultiply = numberOne * numberTwo;
+        int expectedDivide = numberOne / numberTwo;
+
         mathematics.add(numberOne, numberTwo);
-        Assert.assertEquals(mathematics.getResult(), numberOne + numberTwo, "Not expected result: ");
+        int sumResult = mathematics.getResult();
+        Assert.assertEquals(sumResult, expectedSum, "Not expected result: ");
 
         mathematics.deduct(numberOne, numberTwo);
-        Assert.assertEquals(mathematics.getResult(), numberOne - numberTwo, "Not expected result: ");
+        int deductResult = mathematics.getResult();
+        Assert.assertEquals(deductResult, expectedDeduct, "Not expected result: ");
 
         mathematics.setResult(0);
         mathematics.multiply(numberOne, numberTwo);
-        Assert.assertEquals(mathematics.getResult(), numberOne * numberTwo, "Not expected result: ");
+        int multiplyResult = mathematics.getResult();
+        Assert.assertEquals(multiplyResult, expectedMultiply, "Not expected result: ");
 
         mathematics.setResult(0);
         mathematics.divide(numberOne, numberTwo);
-        Assert.assertEquals(mathematics.getResult(), numberOne / numberTwo, "Not expected result: ");
+        int divideResult = mathematics.getResult();
+        Assert.assertEquals(divideResult, expectedDivide, "Not expected result: ");
     }
 }

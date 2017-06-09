@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 public class TxtDataProvider {
 
-    protected Object[][] DataProviderData;
+    protected Object[][] dataProviderData;
     private String path;
 
     @DataProvider(name = "txtDataProvider")
@@ -22,17 +22,17 @@ public class TxtDataProvider {
 
         String[] rowDataSet = data.toArray(new String[data.size()]);
         int colNumber = rowDataSet[0].split(",").length;
-        DataProviderData = new Object[rowDataSet.length][colNumber];
+        dataProviderData = new Object[rowDataSet.length][colNumber];
 
         int i;
         for (i = 0; i < rowDataSet.length; i++) {
             String rowValue = rowDataSet[i];
             String[] string = rowValue.split(",");
             for (int j = 0; j < colNumber; j++) {
-                DataProviderData[i][j] = Integer.parseInt(string[j]);
+                dataProviderData[i][j] = Integer.parseInt(string[j]);
             }
         }
-        return DataProviderData;
+        return dataProviderData;
     }
 }
 
