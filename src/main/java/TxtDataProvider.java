@@ -7,32 +7,52 @@ import java.util.ArrayList;
 
 public class TxtDataProvider {
 
-    protected Object[][] dataProviderData;
-    private String path;
+    private static final String PATH = "src/main/resources/testData.txt";
+
+    protected boolean isStringValue(String elem) {
+        if (elem.startsWith("\"") && elem.endsWith("\"")) {
+            return true;
+        }
+        return false;
+    }
+
+    protected String removeQuates(String str) {
+        return str.replaceAll("\"", "");
+    }
 
     @DataProvider(name = "txtDataProvider")
     public Object[][] testData() throws IOException {
-
-        BufferedReader readDate = new BufferedReader(new FileReader("src/main/resources/testData.txt"));
+        BufferedReader readDate = new BufferedReader(new FileReader(PATH));
         ArrayList<String> data = new ArrayList<String>();
         String row;
         while ((row = readDate.readLine()) != null) {
             data.add(row);
         }
 
-        String[] rowDataSet = data.toArray(new String[data.size()]);
-        int colNumber = rowDataSet[0].split(",").length;
-        dataProviderData = new Object[rowDataSet.length][colNumber];
+        if (!data.isEmpty()) {
+            Object[][] dataProviderData;
+            int colNumber = data.get(0).split(",").length;
+            dataProviderData = new Object[data.size()][colNumber];
 
-        int i;
-        for (i = 0; i < rowDataSet.length; i++) {
-            String rowValue = rowDataSet[i];
-            String[] string = rowValue.split(",");
-            for (int j = 0; j < colNumber; j++) {
-                dataProviderData[i][j] = Integer.parseInt(string[j]);
+            int i = 0;
+            for (String ln : data) {
+                String[] parsedLine = ln.split(",");
+                for (int j = 0; j < colNumber; j++) {
+                    String elem = parsedLine[j];
+                    if (isStringValue(elem)) {
+                        dataProviderData[i][j] = removeQuates(elem);
+                    } else {
+                        dataProviderData[i][j] = Integer.parseInt(elem);
+                    }
+                }
+                i++;
             }
+            return dataProviderData;
+        } else {
+            return new Object[0][0];
         }
-        return dataProviderData;
+
+
     }
 }
 

@@ -73,55 +73,28 @@ public class ClassOneTest extends TxtDataProvider {
 
     @Description("The test gets data from testngDDTTest.xml file. Run testngDDTTest.xml")
     @Test(groups = "fast", dataProvider = "txtDataProvider")
-    public void DDTTest(int numberX, int numberY) {
-        int expectedSum = numberX + numberY;
-        int expectedDeduct = numberX - numberY;
-        int expectedMultiply = numberX * numberY;
-        int expectedDivide = numberX / numberY;
-
-        mathematics.add(numberX, numberY);
-        int sumResult = mathematics.getResult();
-        Assert.assertEquals(sumResult, expectedSum, "Not expected result: ");
-
-        mathematics.deduct(numberX, numberY);
-        int deductResult = mathematics.getResult();
-        Assert.assertEquals(deductResult, expectedDeduct, "Not expected result: ");
-
-        mathematics.setResult(0);
-        mathematics.multiply(numberX, numberY);
-        int multiplyResult = mathematics.getResult();
-        Assert.assertEquals(multiplyResult, expectedMultiply, "Not expected result: ");
-
-        mathematics.setResult(0);
-        mathematics.divide(numberX, numberY);
-        int divideResult = mathematics.getResult();
-        Assert.assertEquals(divideResult, expectedDivide, "Not expected result: ");
-    }
-
-    @Description("The test gets data from testData.txt file.")
-    @Test(groups = "fast", dataProvider = "txtDataProvider")
-    public void DDTWithTxtDataProviderTest(int numberOne, int numberTwo) {
-        int expectedSum = numberOne + numberTwo;
-        int expectedDeduct = numberOne - numberTwo;
-        int expectedMultiply = numberOne * numberTwo;
-        int expectedDivide = numberOne / numberTwo;
-
-        mathematics.add(numberOne, numberTwo);
-        int sumResult = mathematics.getResult();
-        Assert.assertEquals(sumResult, expectedSum, "Not expected result: ");
-
-        mathematics.deduct(numberOne, numberTwo);
-        int deductResult = mathematics.getResult();
-        Assert.assertEquals(deductResult, expectedDeduct, "Not expected result: ");
-
-        mathematics.setResult(0);
-        mathematics.multiply(numberOne, numberTwo);
-        int multiplyResult = mathematics.getResult();
-        Assert.assertEquals(multiplyResult, expectedMultiply, "Not expected result: ");
-
-        mathematics.setResult(0);
-        mathematics.divide(numberOne, numberTwo);
-        int divideResult = mathematics.getResult();
-        Assert.assertEquals(divideResult, expectedDivide, "Not expected result: ");
+    public void DDTTest(int numberX, int numberY, String operation, int expectedResult) {
+        int result = 0;
+        switch (operation) {
+            case "add":
+                mathematics.add(numberX, numberY);
+                result = mathematics.getResult();
+                break;
+            case "deduct":
+                mathematics.deduct(numberX, numberY);
+                result = mathematics.getResult();
+                break;
+            case "divide":
+                mathematics.divide(numberX, numberY);
+                result = mathematics.getResult();
+                break;
+            case "multiply":
+                mathematics.multiply(numberX, numberY);
+                result = mathematics.getResult();
+                break;
+            default:
+                Assert.fail("incorrect operation type");
+        }
+        Assert.assertEquals(result, expectedResult, "The result is not correct");
     }
 }
