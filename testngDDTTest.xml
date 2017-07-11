@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="test">
+    <parameter name="numberX" value="100" />
+    <parameter name="numberY" value="25" />
+    <test name="DDT Test from xml file">
+        <classes>
+            <class name="ClassOneTest">
+                <methods>
+                    <include name="DDTTest" />
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite>
